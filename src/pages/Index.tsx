@@ -37,7 +37,24 @@ const mockNews = [
 
 export default function Index() {
   const [selectedCategory, setSelectedCategory] = useState("for you");
-  const categories = ["for you", "technology", "politics", "environment", "economy", "culture"];
+  const categories = [
+    "for you",
+    "all",
+    "technology",
+    "politics",
+    "environment",
+    "economy",
+    "culture",
+    "science",
+    "health",
+    "sports",
+    "entertainment",
+    "business",
+    "education",
+    "travel",
+    "food",
+    "lifestyle"
+  ];
 
   // Get greeting based on time of day
   const getGreeting = () => {
@@ -55,7 +72,7 @@ export default function Index() {
           <div>
             <h2 className="text-lg font-medium text-muted-foreground sm:text-xl">{getGreeting()}</h2>
             <h1 className="mt-1 text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl">
-              For You
+              Sarah Chen
             </h1>
           </div>
           <button
@@ -66,20 +83,22 @@ export default function Index() {
           </button>
         </div>
         
-        <div className="mb-6 flex flex-wrap gap-2 md:mb-8">
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setSelectedCategory(category)}
-              className={`rounded-full px-3 py-1.5 text-sm font-medium transition-colors sm:px-4 sm:py-2 ${
-                selectedCategory === category
-                  ? "bg-primary text-primary-foreground"
-                  : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
-              }`}
-            >
-              {category.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
-            </button>
-          ))}
+        <div className="relative mb-6 -mx-4 px-4 sm:-mx-6 sm:px-6 md:-mx-8 md:px-8 md:mb-8">
+          <div className="flex gap-2 overflow-x-auto pb-4 no-scrollbar">
+            {categories.map((category) => (
+              <button
+                key={category}
+                onClick={() => setSelectedCategory(category)}
+                className={`rounded-full px-3 py-1.5 text-sm font-medium transition-colors whitespace-nowrap sm:px-4 sm:py-2 ${
+                  selectedCategory === category
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                }`}
+              >
+                {category.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+              </button>
+            ))}
+          </div>
         </div>
 
         <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
