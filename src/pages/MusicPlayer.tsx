@@ -17,13 +17,13 @@ interface LocationState {
 export default function MusicPlayer() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { news } = (location.state as LocationState) || { news: null };
+  const news = location.state?.news;
   const [isPlaying, setIsPlaying] = useState(false);
 
   if (!news) {
     return (
       <div className="flex min-h-screen items-center justify-center">
-        <p>No news content found.</p>
+        <p>No news content found. Please select a news article first.</p>
       </div>
     );
   }
