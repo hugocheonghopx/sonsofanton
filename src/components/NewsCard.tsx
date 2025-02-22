@@ -72,10 +72,10 @@ export default function NewsCard({ title, summary, brands, timestamp, category, 
           </button>
           <button
             onClick={() => handleModeClick("music")}
-            className={`inline-flex h-8 w-8 items-center justify-center rounded-full bg-secondary text-secondary-foreground transition-colors hover:bg-secondary/80 ${mode === "music" ? "bg-primary text-primary-foreground" : ""}`}
+            className={`inline-flex h-12 w-12 items-center justify-center rounded-full bg-[#8B5CF6] text-white transition-all duration-300 hover:bg-[#7C3AED] hover:scale-105 ${mode === "music" ? "ring-2 ring-[#8B5CF6]/50" : ""}`}
             aria-label="Music mode"
           >
-            <Play className="h-4 w-4" />
+            <Play className="h-6 w-6 pl-0.5" />
           </button>
         </div>
       </div>
