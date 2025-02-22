@@ -3,6 +3,12 @@ import { useState, useEffect } from "react";
 import { Settings, X } from "lucide-react";
 import Sidebar from "@/components/Sidebar";
 import NewsCard from "@/components/NewsCard";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 // Mock data for demonstration
 const mockNews = [
@@ -124,23 +130,24 @@ export default function Index() {
             </h1>
           </div>
           <div className="flex items-center gap-4">
-            <button
-              onClick={() => setShowDebug(!showDebug)}
-              className={`rounded-full px-4 py-2 text-sm transition-colors ${
-                showDebug ? "bg-[#13583E] text-white" : "bg-secondary text-secondary-foreground"
-              }`}
-            >
-              Debug
-            </button>
-            <button
-              className="rounded-full bg-secondary p-2 transition-colors hover:bg-secondary/80"
-              aria-label="Settings"
-            >
-              <Settings className="h-5 w-5" />
-            </button>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <button
+                  className="rounded-full bg-secondary p-2 transition-colors hover:bg-secondary/80"
+                  aria-label="Settings"
+                >
+                  <Settings className="h-5 w-5" />
+                </button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem onClick={() => setShowDebug(!showDebug)}>
+                  {showDebug ? "Hide Debug Console" : "Show Debug Console"}
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
-        
+
         {/* Categories section */}
         <div className="relative mb-6 -mx-4 px-4 sm:-mx-6 sm:px-6 md:-mx-8 md:px-8 md:mb-8">
           <div className="flex gap-2 overflow-x-auto pb-4 no-scrollbar">
