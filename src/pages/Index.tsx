@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Settings, Sun, Moon } from "lucide-react";
 import Sidebar from "@/components/Sidebar";
@@ -59,19 +58,7 @@ export default function Index() {
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", theme === "dark");
-    if (theme === "light") {
-      document.documentElement.style.setProperty("--background", "#F9F7F3");
-      document.documentElement.style.setProperty("--foreground", "#1A1A1A");
-      document.documentElement.style.setProperty("--card", "#FFFFFF");
-      document.documentElement.style.setProperty("--secondary", "#ECEAE6");
-      document.documentElement.style.setProperty("--muted-foreground", "#717171");
-    } else {
-      document.documentElement.style.setProperty("--background", "215 25% 8%");
-      document.documentElement.style.setProperty("--foreground", "0 0% 98%");
-      document.documentElement.style.setProperty("--card", "215 25% 12%");
-      document.documentElement.style.setProperty("--secondary", "215 25% 16%");
-      document.documentElement.style.setProperty("--muted-foreground", "215 5% 65%");
-    }
+    document.documentElement.classList.toggle("light", theme === "light");
   }, [theme]);
 
   const getGreeting = () => {
@@ -88,7 +75,7 @@ export default function Index() {
         <div className="mb-8 flex items-center justify-between">
           <div>
             <h2 className="text-lg font-medium text-muted-foreground sm:text-xl">{getGreeting()}</h2>
-            <h1 className="mt-1 text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl">
+            <h1 className="mt-1 text-2xl font-bold tracking-tight text-foreground sm:text-3xl md:text-4xl">
               John Anton
             </h1>
           </div>
@@ -121,7 +108,7 @@ export default function Index() {
                 onClick={() => setSelectedCategory(category)}
                 className={`rounded-full px-3 py-1.5 text-sm font-medium transition-colors whitespace-nowrap sm:px-4 sm:py-2 ${
                   selectedCategory === category
-                    ? "bg-[#13583E] text-white shadow-lg"
+                    ? "bg-primary text-primary-foreground shadow-lg"
                     : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
                 }`}
               >
