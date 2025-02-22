@@ -72,7 +72,7 @@ export default function Index() {
           <div>
             <h2 className="text-lg font-medium text-muted-foreground sm:text-xl">{getGreeting()}</h2>
             <h1 className="mt-1 text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl">
-              Sarah Provan
+              John Anton
             </h1>
           </div>
           <button
