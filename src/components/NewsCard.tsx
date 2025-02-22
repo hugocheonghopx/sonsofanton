@@ -1,6 +1,7 @@
 
 import { Play, Headphones, BookOpen } from "lucide-react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface NewsCardProps {
   title: string;
@@ -13,6 +14,18 @@ interface NewsCardProps {
 
 export default function NewsCard({ title, summary, brands, timestamp, category, image }: NewsCardProps) {
   const [mode, setMode] = useState<"read" | "listen" | "music">("read");
+  const navigate = useNavigate();
+
+  const handleModeClick = (selectedMode: "read" | "listen" | "music") => {
+    setMode(selectedMode);
+    if (selectedMode === "music") {
+      navigate("/player", { 
+        state: { 
+          news: { title, summary, brands, timestamp, category, image } 
+        } 
+      });
+    }
+  };
 
   return (
     <div className="news-card">
@@ -50,21 +63,21 @@ export default function NewsCard({ title, summary, brands, timestamp, category, 
         
         <div className="flex gap-1 sm:gap-2">
           <button
-            onClick={() => setMode("read")}
+            onClick={() => handleModeClick("read")}
             className={`mode-switch ${mode === "read" ? "bg-primary text-primary-foreground" : ""}`}
             aria-label="Read mode"
           >
             <BookOpen className="h-4 w-4" />
           </button>
           <button
-            onClick={() => setMode("listen")}
+            onClick={() => handleModeClick("listen")}
             className={`mode-switch ${mode === "listen" ? "bg-primary text-primary-foreground" : ""}`}
             aria-label="Listen mode"
           >
             <Headphones className="h-4 w-4" />
           </button>
           <button
-            onClick={() => setMode("music")}
+            onClick={() => handleModeClick("music")}
             className={`mode-switch ${mode === "music" ? "bg-primary text-primary-foreground" : ""}`}
             aria-label="Music mode"
           >

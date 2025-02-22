@@ -7,6 +7,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import MusicPlayer from "./pages/MusicPlayer";
+import Article from "./pages/Article";
 
 const queryClient = new QueryClient();
 
@@ -18,6 +20,8 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/player" element={<MusicPlayer />} />
+          <Route path="/article" element={<Article />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
