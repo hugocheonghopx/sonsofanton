@@ -5,16 +5,26 @@ import { useState } from "react";
 interface NewsCardProps {
   title: string;
   summary: string;
-  source: string;
+  brands: string[];
   timestamp: string;
   category: string;
+  image: string;
 }
 
-export default function NewsCard({ title, summary, source, timestamp, category }: NewsCardProps) {
+export default function NewsCard({ title, summary, brands, timestamp, category, image }: NewsCardProps) {
   const [mode, setMode] = useState<"read" | "listen" | "music">("read");
 
   return (
     <div className="news-card">
+      <div className="relative mb-4 h-40 overflow-hidden rounded-lg">
+        <img 
+          src={image} 
+          alt={title}
+          className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+      </div>
+
       <div className="mb-3 flex flex-wrap items-center justify-between gap-2 sm:mb-4">
         <span className="rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary sm:px-3">
           {category}
@@ -26,7 +36,17 @@ export default function NewsCard({ title, summary, source, timestamp, category }
       <p className="mb-3 text-sm text-muted-foreground line-clamp-2 sm:mb-4">{summary}</p>
       
       <div className="mt-3 flex flex-wrap items-center justify-between gap-3 sm:mt-4">
-        <span className="text-xs text-muted-foreground">{source}</span>
+        <div className="flex -space-x-2">
+          {brands.map((brand, index) => (
+            <div
+              key={brand}
+              className="flex h-6 w-6 items-center justify-center rounded-full bg-secondary text-xs font-medium ring-2 ring-background"
+              title={brand}
+            >
+              {brand[0]}
+            </div>
+          ))}
+        </div>
         
         <div className="flex gap-1 sm:gap-2">
           <button
