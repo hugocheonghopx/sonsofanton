@@ -62,7 +62,7 @@ export default function NewsCard({ title, summary, brands, timestamp, category, 
           ))}
         </div>
         
-        <div className="flex gap-1 sm:gap-2">
+        <div className="flex items-end gap-4">
           <button
             onClick={() => handleModeClick("read")}
             className={`inline-flex h-8 w-8 items-center justify-center rounded-full bg-secondary text-secondary-foreground transition-colors hover:bg-secondary/80 ${mode === "read" ? "bg-primary text-primary-foreground" : ""}`}
@@ -72,7 +72,7 @@ export default function NewsCard({ title, summary, brands, timestamp, category, 
           </button>
           <button
             onClick={() => handleModeClick("music")}
-            className={`inline-flex h-12 w-12 items-center justify-center rounded-full bg-[#8B5CF6] text-white transition-all duration-300 hover:bg-[#7C3AED] hover:scale-105 ${mode === "music" ? "ring-2 ring-[#8B5CF6]/50" : ""}`}
+            className={`inline-flex h-12 w-12 items-center justify-center rounded-full bg-[#13583E] text-white transition-all duration-300 hover:bg-[#13583E]/80 hover:scale-105 ${mode === "music" ? "ring-2 ring-[#13583E]/50" : ""}`}
             aria-label="Music mode"
           >
             <Play className="h-6 w-6 pl-0.5" />
