@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Settings } from "lucide-react";
 import Sidebar from "@/components/Sidebar";
@@ -56,7 +55,6 @@ export default function Index() {
     "lifestyle"
   ];
 
-  // Get greeting based on time of day
   const getGreeting = () => {
     const hour = new Date().getHours();
     if (hour < 12) return "Good Morning";
@@ -91,7 +89,7 @@ export default function Index() {
                 onClick={() => setSelectedCategory(category)}
                 className={`rounded-full px-3 py-1.5 text-sm font-medium transition-colors whitespace-nowrap sm:px-4 sm:py-2 ${
                   selectedCategory === category
-                    ? "bg-primary text-primary-foreground"
+                    ? "bg-[#13583E] text-white shadow-lg"
                     : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
                 }`}
               >
