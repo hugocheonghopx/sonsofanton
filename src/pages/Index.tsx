@@ -1,14 +1,7 @@
-
-import { useState, useEffect } from "react";
-import { Settings, X } from "lucide-react";
+import { useState } from "react";
+import { Settings } from "lucide-react";
 import Sidebar from "@/components/Sidebar";
 import NewsCard from "@/components/NewsCard";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 
 // Mock data for demonstration
 const mockNews = [
@@ -43,8 +36,6 @@ const mockNews = [
 
 export default function Index() {
   const [selectedCategory, setSelectedCategory] = useState("for you");
-  const [showDebug, setShowDebug] = useState(true);
-  const [logs, setLogs] = useState<string[]>([]);
   const categories = [
     "for you",
     "all",
@@ -64,58 +55,11 @@ export default function Index() {
     "lifestyle"
   ];
 
-  useEffect(() => {
-    const originalConsoleLog = console.log;
-    const originalConsoleError = console.error;
-    const originalConsoleWarn = console.warn;
-
-    function handleLog(...args: any[]) {
-      const logMessage = args.map(arg => 
-        typeof arg === 'object' ? JSON.stringify(arg) : String(arg)
-      ).join(' ');
-      
-      setLogs(prevLogs => [...prevLogs, `[LOG] ${logMessage}`]);
-      originalConsoleLog.apply(console, args);
-    }
-
-    function handleError(...args: any[]) {
-      const logMessage = args.map(arg => 
-        typeof arg === 'object' ? JSON.stringify(arg) : String(arg)
-      ).join(' ');
-      
-      setLogs(prevLogs => [...prevLogs, `[ERROR] ${logMessage}`]);
-      originalConsoleError.apply(console, args);
-    }
-
-    function handleWarn(...args: any[]) {
-      const logMessage = args.map(arg => 
-        typeof arg === 'object' ? JSON.stringify(arg) : String(arg)
-      ).join(' ');
-      
-      setLogs(prevLogs => [...prevLogs, `[WARN] ${logMessage}`]);
-      originalConsoleWarn.apply(console, args);
-    }
-
-    console.log = handleLog;
-    console.error = handleError;
-    console.warn = handleWarn;
-
-    return () => {
-      console.log = originalConsoleLog;
-      console.error = originalConsoleError;
-      console.warn = originalConsoleWarn;
-    };
-  }, []);
-
   const getGreeting = () => {
     const hour = new Date().getHours();
     if (hour < 12) return "Good Morning";
     if (hour < 18) return "Good Afternoon";
     return "Good Evening";
-  };
-
-  const clearLogs = () => {
-    setLogs([]);
   };
 
   return (
@@ -129,26 +73,14 @@ export default function Index() {
               John Anton
             </h1>
           </div>
-          <div className="flex items-center gap-4">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <button
-                  className="rounded-full bg-secondary p-2 transition-colors hover:bg-secondary/80"
-                  aria-label="Settings"
-                >
-                  <Settings className="h-5 w-5" />
-                </button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => setShowDebug(!showDebug)}>
-                  {showDebug ? "Hide Debug Console" : "Show Debug Console"}
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
+          <button
+            className="rounded-full bg-secondary p-2 transition-colors hover:bg-secondary/80"
+            aria-label="Settings"
+          >
+            <Settings className="h-5 w-5" />
+          </button>
         </div>
-
-        {/* Categories section */}
+        
         <div className="relative mb-6 -mx-4 px-4 sm:-mx-6 sm:px-6 md:-mx-8 md:px-8 md:mb-8">
           <div className="flex gap-2 overflow-x-auto pb-4 no-scrollbar">
             {categories.map((category) => (
@@ -167,47 +99,11 @@ export default function Index() {
           </div>
         </div>
 
-        {/* News grid */}
         <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
           {mockNews.map((news) => (
             <NewsCard key={news.id} {...news} />
           ))}
         </div>
-
-        {/* Debug window */}
-        {showDebug && (
-          <div className="fixed bottom-4 right-4 w-96 max-h-96 bg-card border rounded-lg shadow-lg overflow-hidden">
-            <div className="bg-secondary p-2 flex justify-between items-center">
-              <h3 className="text-sm font-medium">Debug Console</h3>
-              <div className="flex gap-2">
-                <button
-                  onClick={clearLogs}
-                  className="text-xs px-2 py-1 rounded bg-primary/10 text-primary hover:bg-primary/20"
-                >
-                  Clear
-                </button>
-                <button
-                  onClick={() => setShowDebug(false)}
-                  className="text-muted-foreground hover:text-foreground"
-                >
-                  <X className="h-4 w-4" />
-                </button>
-              </div>
-            </div>
-            <div className="overflow-y-auto h-64 p-2 bg-background/95 font-mono text-xs">
-              {logs.map((log, index) => (
-                <div key={index} className="py-1 border-b border-border/20 last:border-0">
-                  {log}
-                </div>
-              ))}
-              {logs.length === 0 && (
-                <div className="text-muted-foreground text-center py-4">
-                  No logs yet
-                </div>
-              )}
-            </div>
-          </div>
-        )}
       </main>
     </div>
   );
