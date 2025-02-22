@@ -33,21 +33,22 @@ const mockNews = [
 
 export default function Index() {
   const [selectedCategory, setSelectedCategory] = useState("all");
-
   const categories = ["all", "technology", "politics", "environment", "economy", "culture"];
 
   return (
     <div className="min-h-screen bg-background">
       <Sidebar />
-      <main className="ml-64 p-8">
-        <h1 className="mb-8 text-4xl font-bold tracking-tight">For You</h1>
+      <main className="p-4 transition-all duration-300 sm:p-6 md:p-8 lg:ml-64">
+        <h1 className="mb-6 text-2xl font-bold tracking-tight sm:text-3xl md:mb-8 md:text-4xl">
+          For You
+        </h1>
         
-        <div className="mb-8 flex gap-2">
+        <div className="mb-6 flex flex-wrap gap-2 md:mb-8">
           {categories.map((category) => (
             <button
               key={category}
               onClick={() => setSelectedCategory(category)}
-              className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+              className={`rounded-full px-3 py-1.5 text-sm font-medium transition-colors sm:px-4 sm:py-2 ${
                 selectedCategory === category
                   ? "bg-primary text-primary-foreground"
                   : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
@@ -58,7 +59,7 @@ export default function Index() {
           ))}
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
           {mockNews.map((news) => (
             <NewsCard key={news.id} {...news} />
           ))}
