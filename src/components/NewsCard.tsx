@@ -1,5 +1,5 @@
 
-import { Play, Headphones, BookOpen } from "lucide-react";
+import { Play, BookOpen } from "lucide-react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -13,10 +13,10 @@ interface NewsCardProps {
 }
 
 export default function NewsCard({ title, summary, brands, timestamp, category, image }: NewsCardProps) {
-  const [mode, setMode] = useState<"read" | "listen" | "music">("read");
+  const [mode, setMode] = useState<"read" | "music">("read");
   const navigate = useNavigate();
 
-  const handleModeClick = (selectedMode: "read" | "listen" | "music") => {
+  const handleModeClick = (selectedMode: "read" | "music") => {
     setMode(selectedMode);
     if (selectedMode === "music") {
       console.log("Navigating to player with news:", { title, summary, brands, timestamp, category, image });
@@ -69,13 +69,6 @@ export default function NewsCard({ title, summary, brands, timestamp, category, 
             aria-label="Read mode"
           >
             <BookOpen className="h-4 w-4" />
-          </button>
-          <button
-            onClick={() => handleModeClick("listen")}
-            className={`inline-flex h-8 w-8 items-center justify-center rounded-full bg-secondary text-secondary-foreground transition-colors hover:bg-secondary/80 ${mode === "listen" ? "bg-primary text-primary-foreground" : ""}`}
-            aria-label="Listen mode"
-          >
-            <Headphones className="h-4 w-4" />
           </button>
           <button
             onClick={() => handleModeClick("music")}
