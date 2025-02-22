@@ -19,10 +19,16 @@ export default function NewsCard({ title, summary, brands, timestamp, category, 
   const handleModeClick = (selectedMode: "read" | "music") => {
     setMode(selectedMode);
     if (selectedMode === "music") {
-      console.log("Navigating to player with news:", { title, summary, brands, timestamp, category, image });
       navigate("/player", { 
         state: { 
-          news: { title, summary, brands, timestamp, category, image } 
+          news: { 
+            title, 
+            summary, 
+            brands, 
+            timestamp, 
+            category, 
+            image 
+          } 
         } 
       });
     }

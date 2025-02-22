@@ -17,7 +17,7 @@ interface LocationState {
 export default function MusicPlayer() {
   const location = useLocation();
   const navigate = useNavigate();
-  const news = location.state?.news;
+  const { news } = location.state as LocationState;
   const [isPlaying, setIsPlaying] = useState(false);
 
   if (!news) {
