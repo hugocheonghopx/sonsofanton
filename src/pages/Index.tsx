@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Settings } from "lucide-react";
 import Sidebar from "@/components/Sidebar";
@@ -89,7 +90,7 @@ export default function Index() {
                 onClick={() => setSelectedCategory(category)}
                 className={`rounded-full px-3 py-1.5 text-sm font-medium transition-colors whitespace-nowrap sm:px-4 sm:py-2 ${
                   selectedCategory === category
-                    ? "bg-[#13583E] text-white shadow-lg"
+                    ? "bg-[#2A7D5F] text-white shadow-lg hover:bg-[#2A7D5F]/90"
                     : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
                 }`}
               >
