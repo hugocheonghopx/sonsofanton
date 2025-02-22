@@ -19,6 +19,7 @@ export default function NewsCard({ title, summary, brands, timestamp, category, 
   const handleModeClick = (selectedMode: "read" | "listen" | "music") => {
     setMode(selectedMode);
     if (selectedMode === "music") {
+      console.log("Navigating to player with news:", { title, summary, brands, timestamp, category, image });
       navigate("/player", { 
         state: { 
           news: { title, summary, brands, timestamp, category, image } 
@@ -64,21 +65,21 @@ export default function NewsCard({ title, summary, brands, timestamp, category, 
         <div className="flex gap-1 sm:gap-2">
           <button
             onClick={() => handleModeClick("read")}
-            className={`mode-switch ${mode === "read" ? "bg-primary text-primary-foreground" : ""}`}
+            className={`inline-flex h-8 w-8 items-center justify-center rounded-full bg-secondary text-secondary-foreground transition-colors hover:bg-secondary/80 ${mode === "read" ? "bg-primary text-primary-foreground" : ""}`}
             aria-label="Read mode"
           >
             <BookOpen className="h-4 w-4" />
           </button>
           <button
             onClick={() => handleModeClick("listen")}
-            className={`mode-switch ${mode === "listen" ? "bg-primary text-primary-foreground" : ""}`}
+            className={`inline-flex h-8 w-8 items-center justify-center rounded-full bg-secondary text-secondary-foreground transition-colors hover:bg-secondary/80 ${mode === "listen" ? "bg-primary text-primary-foreground" : ""}`}
             aria-label="Listen mode"
           >
             <Headphones className="h-4 w-4" />
           </button>
           <button
             onClick={() => handleModeClick("music")}
-            className={`mode-switch ${mode === "music" ? "bg-primary text-primary-foreground" : ""}`}
+            className={`inline-flex h-8 w-8 items-center justify-center rounded-full bg-secondary text-secondary-foreground transition-colors hover:bg-secondary/80 ${mode === "music" ? "bg-primary text-primary-foreground" : ""}`}
             aria-label="Music mode"
           >
             <Play className="h-4 w-4" />
