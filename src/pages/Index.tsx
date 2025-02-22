@@ -1,5 +1,6 @@
-import { useState } from "react";
-import { Settings } from "lucide-react";
+
+import { useState, useEffect } from "react";
+import { Settings, Sun, Moon } from "lucide-react";
 import Sidebar from "@/components/Sidebar";
 import NewsCard from "@/components/NewsCard";
 
@@ -36,6 +37,7 @@ const mockNews = [
 
 export default function Index() {
   const [selectedCategory, setSelectedCategory] = useState("for you");
+  const [theme, setTheme] = useState<"dark" | "light">("dark");
   const categories = [
     "for you",
     "all",
@@ -55,6 +57,23 @@ export default function Index() {
     "lifestyle"
   ];
 
+  useEffect(() => {
+    document.documentElement.classList.toggle("dark", theme === "dark");
+    if (theme === "light") {
+      document.documentElement.style.setProperty("--background", "#F9F7F3");
+      document.documentElement.style.setProperty("--foreground", "#1A1A1A");
+      document.documentElement.style.setProperty("--card", "#FFFFFF");
+      document.documentElement.style.setProperty("--secondary", "#ECEAE6");
+      document.documentElement.style.setProperty("--muted-foreground", "#717171");
+    } else {
+      document.documentElement.style.setProperty("--background", "215 25% 8%");
+      document.documentElement.style.setProperty("--foreground", "0 0% 98%");
+      document.documentElement.style.setProperty("--card", "215 25% 12%");
+      document.documentElement.style.setProperty("--secondary", "215 25% 16%");
+      document.documentElement.style.setProperty("--muted-foreground", "215 5% 65%");
+    }
+  }, [theme]);
+
   const getGreeting = () => {
     const hour = new Date().getHours();
     if (hour < 12) return "Good Morning";
@@ -73,12 +92,25 @@ export default function Index() {
               John Anton
             </h1>
           </div>
-          <button
-            className="rounded-full bg-secondary p-2 transition-colors hover:bg-secondary/80"
-            aria-label="Settings"
-          >
-            <Settings className="h-5 w-5" />
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="rounded-full bg-secondary p-2 transition-colors hover:bg-secondary/80"
+              aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            >
+              {theme === "dark" ? (
+                <Sun className="h-5 w-5" />
+              ) : (
+                <Moon className="h-5 w-5" />
+              )}
+            </button>
+            <button
+              className="rounded-full bg-secondary p-2 transition-colors hover:bg-secondary/80"
+              aria-label="Settings"
+            >
+              <Settings className="h-5 w-5" />
+            </button>
+          </div>
         </div>
         
         <div className="relative mb-6 -mx-4 px-4 sm:-mx-6 sm:px-6 md:-mx-8 md:px-8 md:mb-8">
