@@ -17,16 +17,25 @@ interface LocationState {
 export default function MusicPlayer() {
   const location = useLocation();
   const navigate = useNavigate();
-  const { news } = location.state as LocationState;
   const [isPlaying, setIsPlaying] = useState(false);
 
-  if (!news) {
+  // Check if location.state exists before destructuring
+  if (!location.state) {
     return (
-      <div className="flex min-h-screen items-center justify-center">
-        <p>No news content found. Please select a news article first.</p>
+      <div className="flex min-h-screen flex-col items-center justify-center gap-4 p-4">
+        <p className="text-center text-lg">No news content found. Please select a news article first.</p>
+        <button
+          onClick={() => navigate("/")}
+          className="flex items-center gap-2 rounded-full bg-secondary px-6 py-2 text-secondary-foreground hover:bg-secondary/80"
+        >
+          <ArrowLeft className="h-5 w-5" />
+          <span>Go back home</span>
+        </button>
       </div>
     );
   }
+
+  const { news } = location.state as LocationState;
 
   const handleReadMore = () => {
     navigate("/article", { state: { news } });
