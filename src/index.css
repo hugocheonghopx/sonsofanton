@@ -23,26 +23,6 @@
     --input: 215 25% 16%;
     --ring: 172 66% 50%;
   }
-
-  :root.light {
-    --background: 40 33% 96%;
-    --foreground: 224 71.4% 4.1%;
-    --card: 0 0% 100%;
-    --card-foreground: 224 71.4% 4.1%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 224 71.4% 4.1%;
-    --primary: 172 66% 40%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 220 14.3% 95.9%;
-    --secondary-foreground: 220.9 39.3% 11%;
-    --muted: 220 14.3% 95.9%;
-    --muted-foreground: 220 8.9% 46.1%;
-    --accent: 220 14.3% 95.9%;
-    --accent-foreground: 220.9 39.3% 11%;
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 172 66% 40%;
-  }
 }
 
 @layer base {
@@ -94,17 +74,3 @@
   transform: translateY(0);
   transition: opacity 300ms, transform 300ms;
 }
-
-/* Light mode specific adjustments */
-:root.light .news-card {
-  @apply shadow-sm border border-border;
-}
-
-:root.light .nav-item {
-  @apply text-gray-600 hover:text-gray-900;
-}
-
-:root.light .nav-item.active {
-  @apply bg-secondary text-gray-900;
-}
-

@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
-import { Settings, Sun, Moon } from "lucide-react";
+
+import { useState } from "react";
+import { Settings } from "lucide-react";
 import Sidebar from "@/components/Sidebar";
 import NewsCard from "@/components/NewsCard";
 
@@ -36,7 +37,6 @@ const mockNews = [
 
 export default function Index() {
   const [selectedCategory, setSelectedCategory] = useState("for you");
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
   const categories = [
     "for you",
     "all",
@@ -56,11 +56,6 @@ export default function Index() {
     "lifestyle"
   ];
 
-  useEffect(() => {
-    document.documentElement.classList.toggle("dark", theme === "dark");
-    document.documentElement.classList.toggle("light", theme === "light");
-  }, [theme]);
-
   const getGreeting = () => {
     const hour = new Date().getHours();
     if (hour < 12) return "Good Morning";
@@ -75,29 +70,16 @@ export default function Index() {
         <div className="mb-8 flex items-center justify-between">
           <div>
             <h2 className="text-lg font-medium text-muted-foreground sm:text-xl">{getGreeting()}</h2>
-            <h1 className="mt-1 text-2xl font-bold tracking-tight text-foreground sm:text-3xl md:text-4xl">
+            <h1 className="mt-1 text-2xl font-bold tracking-tight sm:text-3xl md:text-4xl">
               John Anton
             </h1>
           </div>
-          <div className="flex items-center gap-2">
-            <button
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="rounded-full bg-secondary p-2 transition-colors hover:bg-secondary/80"
-              aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-            >
-              {theme === "dark" ? (
-                <Sun className="h-5 w-5" />
-              ) : (
-                <Moon className="h-5 w-5" />
-              )}
-            </button>
-            <button
-              className="rounded-full bg-secondary p-2 transition-colors hover:bg-secondary/80"
-              aria-label="Settings"
-            >
-              <Settings className="h-5 w-5" />
-            </button>
-          </div>
+          <button
+            className="rounded-full bg-secondary p-2 transition-colors hover:bg-secondary/80"
+            aria-label="Settings"
+          >
+            <Settings className="h-5 w-5" />
+          </button>
         </div>
         
         <div className="relative mb-6 -mx-4 px-4 sm:-mx-6 sm:px-6 md:-mx-8 md:px-8 md:mb-8">
@@ -108,7 +90,7 @@ export default function Index() {
                 onClick={() => setSelectedCategory(category)}
                 className={`rounded-full px-3 py-1.5 text-sm font-medium transition-colors whitespace-nowrap sm:px-4 sm:py-2 ${
                   selectedCategory === category
-                    ? "bg-primary text-primary-foreground shadow-lg"
+                    ? "bg-[#2A7D5F] text-white shadow-lg hover:bg-[#2A7D5F]/90"
                     : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
                 }`}
               >
